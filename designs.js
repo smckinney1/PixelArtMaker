@@ -7,31 +7,36 @@
 
 $(function () {
 	function makeGrid(e) {
-
-		//TODO: Allow multiple submissions by clearing out the columns also - just testing rows to start with
-
+		//Prevent page reload
 		e.preventDefault();
 
+		//Remove table data so that new one can be built
+		$('tr').remove();
+
 		let rows = Number($('#input_height').val());
-		let columns = $('#input_width').val();
+		let columns = Number($('#input_width').val());
 		let canvas = $('#pixel_canvas');
-
-		$('.art-row').remove();
-
-		//TODO: get color
+		let colHTML = '';
 
 		for (var i = 0; i < rows; i++) {
-			canvas.append('<tr class="art-row"><td></td></tr>');
+			canvas.append('<tr></tr>');
 		}
 
+		for (var i = 0; i < columns; i++) {
+			colHTML += '<td></td>';
+		}
+
+		$(colHTML).appendTo('tr');
 	}
 
-//set separately so color can be changed after form submission 
-	// function getColor() {
+
+	// function makeColor() {
+	// 	//obtain hex value
 	// 	let color = $('#colorPicker').val();
-	// 	//change color of grid
 	// }
 
 	$('#sizePicker').submit(makeGrid);
-	//$('#colorPicker').change(getColor);
+	//$('#colorPicker').change(makeColor);
+
+	//TODO: Function for actually drawing on the canvas - call makeColor
 });
