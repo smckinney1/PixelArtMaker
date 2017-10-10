@@ -7,6 +7,8 @@
 
 $(function () {
 	function makeGrid(e) {
+		//TODO: Add logic to allow user to cancel submission. Warn that submitting will clear the grid.
+
 		//Prevent page reload
 		e.preventDefault();
 
@@ -30,13 +32,14 @@ $(function () {
 	}
 
 
-	// function makeColor() {
-	// 	//obtain hex value
-	// 	let color = $('#colorPicker').val();
-	// }
+	function getColor() {
+		//obtain hex value
+		let color = $('#colorPicker').val();
+		return color;
+	}
 
 	$('#sizePicker').submit(makeGrid);
-	//$('#colorPicker').change(makeColor);
+	$('#colorPicker').change(getColor);
 
-	//TODO: Function for actually drawing on the canvas - call makeColor
+	//TODO: Function for actually drawing on the canvas - call getColor
 });
