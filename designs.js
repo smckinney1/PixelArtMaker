@@ -8,24 +8,15 @@ $(function () {
 
 	//If a grid already exists, warn user before allowing them to submit a new grid size.
 	function proceedWithSubmission() {
-		if (submitCounter > 0) {
-			let confirmation = confirm('Warning: Submitting new grid size will erase your current drawing. Continue?');
-			if (confirmation === true) {
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return true;
-		}
+		return (submitCounter === 0 || confirm('Warning: Submitting new grid size will erase your current drawing. Continue?'));
 	}
 
 	function makeGrid(e) {
 		//Prevent page reload
 		e.preventDefault();
-		
+
 		let proceed = proceedWithSubmission();
-		if (proceed == true) {
+		if (proceed) {
 			$('tr').remove();
 
 			let rows = Number($('#input_height').val());
@@ -49,13 +40,13 @@ $(function () {
 
 	function draw(e) {
 		//TODO: if current color of the cell is other than white, change back to white upon new click
-		//TODO: issue with certain kinds of clicking...it'll change the whole row or whole table to the current color
 		let color = $('#colorPicker').val();
+		//debugger;
 		$(e.target).css('background-color', color);
 	}
 
 	$('#sizePicker').submit(makeGrid);
-	$('#pixel_canvas').click('td', draw);
+	$('#pixel_canvas').mousedown('td', draw);
 
 });
 
