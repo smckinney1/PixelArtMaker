@@ -20,8 +20,10 @@ $(function () {
 			canvas = $('#pixel_canvas');
 			colHTML = '';
 
+			//Remove current grid
 			$('tr').remove();
 
+			//Create new grid
 			for (let i = 0; i < rows; i++) {
 				canvas.append('<tr></tr>');
 			}
@@ -37,7 +39,6 @@ $(function () {
 	}
 
 	function draw(e) {
-		//TODO: if current color of the cell is other than white, change back to white upon new click
 		let color = $('#colorPicker').val();
 		$(e.target).css('background-color', color);
 	}
