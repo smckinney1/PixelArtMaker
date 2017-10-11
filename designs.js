@@ -31,15 +31,32 @@ $(function () {
 		$(colHTML).appendTo('tr');
 	}
 
-
-	function getColor() {
-		//obtain hex value
+	function draw(e) {
+		//TODO: if current color of the cell is other than white, change back to white upon new click
+		//TODO: issue with certain kinds of clicking...it'll change the whole row or whole table to the current color
 		let color = $('#colorPicker').val();
-		return color;
+		$(e.target).css('background-color', color);
 	}
 
 	$('#sizePicker').submit(makeGrid);
-	$('#colorPicker').change(getColor);
+	$('#pixel_canvas').click('td', draw);
 
-	//TODO: Function for actually drawing on the canvas - call getColor
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
