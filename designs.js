@@ -3,32 +3,47 @@
 
 // When size is submitted by the user, call makeGrid()
 
-
-
 $(function () {
-	function makeGrid(e) {
-		//TODO: Add logic to allow user to cancel submission. Warn that submitting will clear the grid.
+	let submitCounter = 0;
 
+	//If a grid already exists, warn user before allowing them to submit a new grid size.
+	function proceedWithSubmission() {
+		if (submitCounter > 0) {
+			let confirmation = confirm('Warning: Submitting new grid size will erase your current drawing. Continue?');
+			if (confirmation === true) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return true;
+		}
+	}
+
+	function makeGrid(e) {
 		//Prevent page reload
 		e.preventDefault();
+		let proceed = proceedWithSubmission();
+		if (proceed == true) {
+			$('tr').remove();
 
-		//Remove table data so that new one can be built
-		$('tr').remove();
+			let rows = Number($('#input_height').val());
+			let columns = Number($('#input_width').val());
+			let canvas = $('#pixel_canvas');
+			let colHTML = '';
 
-		let rows = Number($('#input_height').val());
-		let columns = Number($('#input_width').val());
-		let canvas = $('#pixel_canvas');
-		let colHTML = '';
+			for (var i = 0; i < rows; i++) {
+				canvas.append('<tr></tr>');
+			}
 
-		for (var i = 0; i < rows; i++) {
-			canvas.append('<tr></tr>');
+			for (var i = 0; i < columns; i++) {
+				colHTML += '<td></td>';
+			}
+
+			$(colHTML).appendTo('tr');
+			submitCounter++;
 		}
-
-		for (var i = 0; i < columns; i++) {
-			colHTML += '<td></td>';
-		}
-
-		$(colHTML).appendTo('tr');
+		
 	}
 
 	function draw(e) {
