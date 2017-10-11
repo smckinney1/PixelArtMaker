@@ -1,8 +1,3 @@
-// Select color input
-// Select size input
-
-// When size is submitted by the user, call makeGrid()
-
 $(function () {
 	let submitCounter = 0;
 
@@ -16,19 +11,22 @@ $(function () {
 		e.preventDefault();
 
 		let proceed = proceedWithSubmission();
+
 		if (proceed) {
+
+			let rows, columns, canvas, colHTML;
+			rows = Number($('#input_height').val());
+			columns = Number($('#input_width').val());
+			canvas = $('#pixel_canvas');
+			colHTML = '';
+
 			$('tr').remove();
 
-			let rows = Number($('#input_height').val());
-			let columns = Number($('#input_width').val());
-			let canvas = $('#pixel_canvas');
-			let colHTML = '';
-
-			for (var i = 0; i < rows; i++) {
+			for (let i = 0; i < rows; i++) {
 				canvas.append('<tr></tr>');
 			}
 
-			for (var i = 0; i < columns; i++) {
+			for (let i = 0; i < columns; i++) {
 				colHTML += '<td></td>';
 			}
 
@@ -41,7 +39,6 @@ $(function () {
 	function draw(e) {
 		//TODO: if current color of the cell is other than white, change back to white upon new click
 		let color = $('#colorPicker').val();
-		//debugger;
 		$(e.target).css('background-color', color);
 	}
 
