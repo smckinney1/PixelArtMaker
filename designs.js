@@ -23,6 +23,7 @@ $(function () {
 	function makeGrid(e) {
 		//Prevent page reload
 		e.preventDefault();
+		
 		let proceed = proceedWithSubmission();
 		if (proceed == true) {
 			$('tr').remove();
