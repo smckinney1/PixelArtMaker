@@ -1,9 +1,12 @@
 $(function () {
-	let submitCounter = 0;
+
+	//represents whether the page is freshly loaded (true) or already has a grid on it (false)
+	let pristine = true;
 
 	//If a grid already exists, warn user before allowing them to submit a new grid size.
 	function proceedWithSubmission() {
-		return (submitCounter === 0 || confirm('Warning: Submitting new grid size will erase your current drawing. Continue?'));
+		if (pristine) return true;
+		return confirm('Warning: Submitting new grid size will erase your current drawing. Continue?');
 	}
 
 	function makeGrid(e) {
@@ -33,7 +36,8 @@ $(function () {
 			}
 
 			$(colHTML).appendTo('tr');
-			submitCounter++;
+
+			pristine = false;
 		}
 		
 	}
